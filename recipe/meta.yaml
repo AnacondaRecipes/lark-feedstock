@@ -25,7 +25,6 @@ requirements:
     - js2py
     - python >=3.6
     - regex
-    - js2py
 
 test:
   imports:
