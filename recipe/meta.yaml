@@ -38,6 +38,7 @@ about:
   summary: a modern parsing library
   license: MIT
   license_file: LICENSE
+  license_family: MIT
   dev_url: https://github.com/lark-parser/lark
 
 extra:
