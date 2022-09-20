@@ -19,9 +19,11 @@ requirements:
   host:
     - regex
     - pip
+    - python
   run:
     - atomicwrites
     - js2py
+    - python
     - regex
 
 test:
