@@ -19,11 +19,9 @@ requirements:
   host:
     - regex
     - pip
-    - python >=3.6
   run:
     - atomicwrites
     - js2py
-    - python >=3.6
     - regex
 
 test:
