@@ -12,18 +12,18 @@ source:
 
 build:
   number: 0
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-
+  skip: True  # [py<36]
+    
 requirements:
   host:
     - regex
     - pip
-    - python >=3.6
+    - python
   run:
     - atomicwrites
     - js2py
-    - python >=3.6
+    - python
     - regex
 
 test:
@@ -39,6 +39,9 @@ about:
   summary: a modern parsing library
   license: MIT
   license_file: LICENSE
+  license_family: MIT
+  dev_url: https://github.com/lark-parser/lark
+  doc_url: https://lark-parser.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
