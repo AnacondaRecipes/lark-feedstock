@@ -1,5 +1,5 @@
 {% set name = "lark" %}
-{% set version = "1.1.2" %}
+{% set version = "1.2.2" %}
 
 
 package:
@@ -8,40 +8,50 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lark-{{ version }}.tar.gz
-  sha256: 7a8d0c07d663da9391d7faee1bf1d7df4998c47ca43a593cbef5c7566acd057a
+  sha256: ca807d0162cd16cef15a8feecb862d7319e7a09bdb13aef927968e45040fed80
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
-  skip: True  # [py<36]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  # [py<38]
     
 requirements:
   host:
-    - regex
     - pip
     - python
+    - setuptools
+    - wheel
   run:
-    - atomicwrites
-    - js2py
     - python
-    - regex
+  run_constrained:
+    - interegular >=0.3.1,<0.4.0
 
 test:
+  source_files:
+  - tests
   imports:
     - lark
   commands:
     - pip check
+    # Skipping tests/test_nearley because the sdist is missing some test data files.
+    - pytest -v tests --ignore tests/test_nearley  # [py>=310]
+    - pytest -v tests --ignore tests/test_nearley --ignore tests/test_pattern_matching.py  # [py<310]
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/lark-parser/lark
-  summary: a modern parsing library
+  summary: Lark is a parsing toolkit for Python, built with a focus on ergonomics, performance and modularity.
+  description: |
+    Lark is a parsing toolkit for Python, built with a focus on ergonomics, performance and modularity.
+
+    Lark can parse all context-free languages. To put it simply, it means that it is capable of parsing almost any programming language out there, and to some degree most natural languages too.
   license: MIT
   license_file: LICENSE
   license_family: MIT
   dev_url: https://github.com/lark-parser/lark
-  doc_url: https://lark-parser.readthedocs.io/en/latest/
+  doc_url: https://lark-parser.readthedocs.io
 
 extra:
   recipe-maintainers:
