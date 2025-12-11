@@ -1,5 +1,5 @@
 {% set name = "lark" %}
-{% set version = "1.2.2" %}
+{% set version = "0.12.0" %}
 
 
 package:
@@ -7,28 +7,28 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lark-{{ version }}.tar.gz
-  sha256: ca807d0162cd16cef15a8feecb862d7319e7a09bdb13aef927968e45040fed80
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lark-{{ version }}.tar.gz
+  sha256: 7da76fcfddadabbbbfd949bbae221efd33938451d90b1fefbbc423c3cccf48ef
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  # [py<38]
+  skip: True  # [py<36]
     
 requirements:
   host:
     - pip
     - python
-    - setuptools
-    - wheel
+    - regex
   run:
     - python
-  run_constrained:
-    - interegular >=0.3.1,<0.4.0
+    - regex
+    - atomicwrites
+    # js2py omitted as it's not compatible with python >=3.12
 
 test:
   source_files:
-  - tests
+    - tests
   imports:
     - lark
   commands:
