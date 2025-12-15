@@ -19,12 +19,10 @@ requirements:
   host:
     - pip
     - python
+    - setuptools
     - regex
   run:
     - python
-    - regex
-    - atomicwrites
-    # js2py omitted as it's not compatible with python >=3.12
 
 test:
   source_files:
