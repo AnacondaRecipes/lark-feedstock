@@ -32,6 +32,7 @@ test:
     - lark
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Skipping tests/test_nearley because the sdist is missing some test data files.
     - pytest -v tests --ignore tests/test_nearley  # [py>=310]
     - pytest -v tests --ignore tests/test_nearley --ignore tests/test_pattern_matching.py  # [py<310]
