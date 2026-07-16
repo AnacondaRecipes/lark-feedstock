@@ -9,9 +9,11 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lark-{{ version }}.tar.gz
   sha256: ca807d0162cd16cef15a8feecb862d7319e7a09bdb13aef927968e45040fed80
+  patches:                                                                    # [ py>=314]
+    - patches/0001-Wrap-functools.partial-in-staticmethod-to-add-compat.patch # [ py>=314]
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: True  # [py<38]
     
